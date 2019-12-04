@@ -2,11 +2,11 @@ FROM alfresco/alfresco-content-repository-community:6.0.7-ga
 
 # Add services configuration to alfresco-global.properties
 RUN echo -e '\n\
-alfresco.host=192.168.3.63\n\
+alfresco.host=37.61.220.146\n\
 alfresco.port=80\n\
 alfresco.protocol=http\n\
 \n\
-share.host=192.168.3.63\n\
+share.host=37.61.220.146\n\
 share.port=80\n\
 share.protocol=http\n\
 \n\
@@ -53,8 +53,8 @@ RUN set -x \
         && mv /tmp/aos/_vti_bin.war /usr/local/tomcat/webapps \
         && rm -rf /tmp/aos alfresco-aos-module-distributionzip-1.2.0.zip
 
-RUN wget https://github.com/ONLYOFFICE/onlyoffice-alfresco/releases/download/v3.0.0/onlyoffice-integration-platform-jar-3.0.0.jar \
-&& mv onlyoffice-integration-platform-jar-3.0.0.jar /usr/local/tomcat/webapps/alfresco/WEB-INF/lib
+RUN wget https://github.com/ONLYOFFICE/onlyoffice-alfresco/releases/download/v4.0.1/onlyoffice-integration-repo.jar \
+&& mv onlyoffice-integration-repo.jar /usr/local/tomcat/webapps/alfresco/WEB-INF/lib
 
 # Install modules and addons
 COPY modules/amps $TOMCAT_DIR/amps
