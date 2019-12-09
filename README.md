@@ -3,12 +3,13 @@
 This will install Alfresco 6.0.7 + ONLYOFFICE docker compose on your server with HTTPS. Please note, that you need to obtain valid CA-signed SSL certificate for your domain.
 
 - Copy repository to your machine.
-- Give `install.sh` executable rights using `chmod +x install.sh` and run it `./install.sh`.
 - Name your certificate `server.crt`, your private key `server.key` and put them in same dir with `install.sh` script.
 - Make sure you installed Docker and Docker Compose, use these guides if needed:
 
    * https://docs.docker.com/install/linux/docker-ce/ubuntu/
    * https://docs.docker.com/compose/install/
+   
+- Give `install.sh` executable rights using `chmod +x install.sh` and run it `./install.sh`.
 
 This installation needs some time to complete, it was tested on Ubuntu 18.04, please be patient!
 
