@@ -1,10 +1,10 @@
 version: "3"
 
 services:
-    http:
-        build: ./http
+    https:
+        build: ./https
         ports:
-          - 80:80 #HTTP
+          - 443:443 #HTTPs
         links:
           - alfresco
           - share
@@ -70,13 +70,16 @@ services:
             - SOLR_CREATE_ALFRESCO_DEFAULTS=alfresco,archive
         volumes:
           - ./data/solr-data:/opt/alfresco-search-services/data
+
     document-server:
-      image: onlyoffice/documentserver:5.4.1.39
+      image: onlyoffice/documentserver:latest
       stdin_open: true
       tty: true
       restart: always
       ports:
         - 8082:80
+        - 8443:443
       volumes:
         - /app/onlyoffice/documentserver/data:/var/www/onlyoffice/Data
         - /app/onlyoffice/documentserver/logs:/var/log/onlyoffice
+        - /app/onlyoffice/documentserver/data/certs:/var/www/onlyoffice/Data/certs

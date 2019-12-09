@@ -1,3 +1,57 @@
+# Alfresco 6.0.7 + ONLYOFFICE + HTTPS Docker
+
+This will install Alfresco 6.0.7 + ONLYOFFICE docker compose on your server with HTTPS. Please note, that you need to obtain valid CA-signed SSL certificate for your domain.
+
+- Copy repository to your machine.
+- Give `install.sh` executable rights using `chmod +x install.sh` and run it `./install.sh`.
+- Name your certificate `server.crt`, your private key `server.key` and put them in same dir with `install.sh` script.
+- Make sure you installed Docker and Docker Compose, use these guides if needed:
+
+   * https://docs.docker.com/install/linux/docker-ce/ubuntu/
+   * https://docs.docker.com/compose/install/
+
+This installation needs some time to complete, it was tested on Ubuntu 18.04, please be patient!
+
+- After installation please open `https://your_domain_name/alfresco/s/admin` (default credentials are admin/admin).
+- ONLYOFFICE Configuration -> Document Editing Service address field should be set as `https://your_domain_name:8443/` -> Save.
+
+Optionally you can enable JWT on Document Server side:
+
+- Use command `docker ps` to show all running containers.
+
+- Enter Document Server container using `docker exec -it document_server_container_id bash`.
+
+- Edit `/etc/onlyoffice/documentserver/local.json` as follows:
+
+      "token": {
+        "enable": {
+          "request": {
+            "inbox": true,
+            "outbox": true
+          },
+          "browser": true
+        },
+        "inbox": {
+          "header": "Authorization"
+        },
+        "outbox": {
+          "header": "Authorization"
+        }
+      },
+      "secret": {
+        "inbox": {
+          "string": "secret"
+        },
+        "outbox": {
+          "string": "secret"
+        },
+        "session": {
+          "string": "secret"
+        }
+
+- After you change any data in `local.json` config don't forget to restart Document Server services using `supervisorctl restart all` in docker container. 
+- You need to set same `secret` on Document Server side and in Alfresco ONLYOFFICE Configuration.
+
 # Alfresco Docker 201806-GA
 
 *Production-ready* composition based in official [Docker Composition](https://github.com/Alfresco/acs-community-deployment/tree/master/docker-compose) provided by Alfresco.
@@ -114,5 +168,3 @@ http://localhost/alfresco
 http://localhost/solr
 http://localhost/api-explorer
 ```
-
-

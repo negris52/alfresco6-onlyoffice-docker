@@ -2,13 +2,13 @@ FROM alfresco/alfresco-content-repository-community:6.0.7-ga
 
 # Add services configuration to alfresco-global.properties
 RUN echo -e '\n\
-alfresco.host=37.61.220.146\n\
-alfresco.port=80\n\
-alfresco.protocol=http\n\
+alfresco.host=your_domain\n\
+alfresco.port=443\n\
+alfresco.protocol=https\n\
 \n\
-share.host=37.61.220.146\n\
-share.port=80\n\
-share.protocol=http\n\
+share.host=your_domain\n\
+share.port=443\n\
+share.protocol=https\n\
 \n\
 ftp.enabled=true\n\
 ftp.port=2121\n\
